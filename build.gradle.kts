@@ -2,4 +2,13 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
+    id("com.google.dagger.hilt.android") version "2.52" apply false
+}
+
+buildscript {
+    dependencies{
+
+        //Safe Args
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.8.8")
+    }
 }

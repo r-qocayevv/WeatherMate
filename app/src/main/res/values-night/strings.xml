@@ -2,4 +2,16 @@
 <resources>
     <string name="weather">Weather</string>
     <string name="forecast">Forecast</string>
+    <string name="next">next</string>
+
+    <!--Guide Title and subtitle -->
+    <string name="title_1">Detailed Hourly Forecast</string>
+    <string name="title_2">Real-Time Weather Map</string>
+    <string name="title_3">Weather Around the World</string>
+    <string name="title_4">Grant location permission to start</string>
+    <string name="subtitle_1">Get in - depth weather information.</string>
+    <string name="subtitle_2">Watch the progress of the precipitation to stay informed</string>
+    <string name="subtitle_3">Add any location you want and swipe easily to chnage.</string>
+    <string name="subtitle_4">or search for a location by clicking on the text 🔍</string>
+    <string name="skip">Skip</string>
 </resources>
