@@ -14,4 +14,12 @@
     <string name="subtitle_3">Add any location you want and swipe easily to chnage.</string>
     <string name="subtitle_4">or search for a location by clicking on the text 🔍</string>
     <string name="skip">Skip</string>
+    <string name="add_location">add location</string>
+    <string name="more">more</string>
+    <string name="degree">degree</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind">Wind</string>
+    <string name="chance_of_rain">Chance of rain</string>
+    <string name="humidity">Humidity</string>
+    <string name="forcats_for_7_days">Forcats for 7 Days</string>
 </resources>

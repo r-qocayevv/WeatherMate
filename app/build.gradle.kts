@@ -64,6 +64,16 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.52")
     kapt("com.google.dagger:hilt-android-compiler:2.52")
 
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
+
+    //Gson
+    implementation ("com.google.code.gson:gson:2.12.1")
+
+    //Location
+    implementation ("com.google.android.gms:play-services-location:21.3.0")
+
 }
 
 kapt {

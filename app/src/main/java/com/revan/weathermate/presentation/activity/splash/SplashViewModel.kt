@@ -1,4 +1,4 @@
-package com.revan.weathermate.presentation.activity
+package com.revan.weathermate.presentation.activity.splash
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

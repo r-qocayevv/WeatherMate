@@ -1,17 +1,18 @@
-package com.revan.weathermate.presentation.fragment
+package com.revan.weathermate.presentation.fragment.guide
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import android.Manifest
-import androidx.activity.result.ActivityResultLauncher
 import com.revan.weathermate.R
 import com.revan.weathermate.databinding.FragmentGuideBinding
+import com.revan.weathermate.presentation.fragment.main.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,8 +33,6 @@ class GuideFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setStatusBarColor(R.color.bright_sky_blue)
-        setNavigationBarColor(R.color.white)
         setViewPagerAdapter()
         changeNextGuide()
         checkIsFinishedGuide()
@@ -43,37 +42,28 @@ class GuideFragment : Fragment() {
         }
 
         binding.skipButton.setOnClickListener {
-            skipGuide()
+            guideNumber = 4
+            changeNextGuide()
         }
     }
 
-    fun checkIsFinishedGuide() {
+    private fun checkIsFinishedGuide() {
         val isFinishedGuide = requireActivity().intent.getBooleanExtra("isFinishedGuide",false)
         if (isFinishedGuide){
-            skipGuide()
+            finishGuide()
         }
     }
 
-    fun skipGuide() {
+    private fun finishGuide() {
         guideViewModel.saveData("isFinishedGuide","true")
         findNavController().navigate(R.id.action_guideFragment_to_weatherInfoFragment)
     }
 
-    fun setViewPagerAdapter(){
+    private fun setViewPagerAdapter(){
         binding.viewPager.adapter = ViewPagerAdapter()
     }
 
-    @Suppress("DEPRECATION")
-    fun setStatusBarColor(color: Int) {
-        activity?.window?.statusBarColor = resources.getColor(color)
-    }
-
-    @Suppress("DEPRECATION")
-    fun setNavigationBarColor(color: Int) {
-        activity?.window?.navigationBarColor = resources.getColor(color)
-    }
-
-    fun changeNextGuide () {
+    private fun changeNextGuide () {
         changeViewPagerImage(guideNumber-1)
 
         when(guideNumber){
@@ -99,6 +89,7 @@ class GuideFragment : Fragment() {
                 binding.titleText.text = getString(R.string.title_4)
                 binding.subtitleText.text = getString(R.string.subtitle_4)
                 binding.nextButtonImage.setImageResource(R.drawable.icon_confirm)
+                binding.skipButton.visibility = View.INVISIBLE
                 updateProgressBar(100)
                 requestPermission()
             }
@@ -109,7 +100,7 @@ class GuideFragment : Fragment() {
     private fun requestPermission() {
         binding.nextButton.setOnClickListener {
             requestLocationPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            skipGuide()
+            finishGuide()
         }
     }
 
@@ -129,11 +120,11 @@ class GuideFragment : Fragment() {
         }
     }
 
-    fun changeViewPagerImage(imageNumber : Int){
+    private fun changeViewPagerImage(imageNumber : Int){
         binding.viewPager.setCurrentItem(imageNumber, true)
     }
 
-    fun updateProgressBar (progress : Int){
+    private fun updateProgressBar (progress : Int){
         binding.progressBar.progress = progress
     }
 
@@ -142,6 +133,3 @@ class GuideFragment : Fragment() {
         super.onDestroy()
     }
 }
-
-
-

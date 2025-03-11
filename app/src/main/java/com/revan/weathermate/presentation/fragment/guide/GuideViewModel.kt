@@ -1,4 +1,4 @@
-package com.revan.weathermate.presentation.fragment
+package com.revan.weathermate.presentation.fragment.guide
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -9,7 +9,8 @@ import javax.inject.Inject
 @HiltViewModel
 class GuideViewModel @Inject constructor(
     application: Application,
-    private val useCase: SaveDataToSharedPreferencesUseCase) : AndroidViewModel(application) {
+    private val useCase: SaveDataToSharedPreferencesUseCase
+) : AndroidViewModel(application) {
 
     fun saveData(key : String,value : String){
         useCase.execute(key,value)

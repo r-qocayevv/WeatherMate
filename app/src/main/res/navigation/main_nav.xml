@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/guideFragment"
-        android:name="com.revan.weathermate.presentation.fragment.GuideFragment"
+        android:name="com.revan.weathermate.presentation.fragment.guide.GuideFragment"
         android:label="fragment_guide"
         tools:layout="@layout/fragment_guide" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/weatherInfoFragment"
-        android:name="com.revan.weathermate.presentation.fragment.WeatherInfoFragment"
+        android:name="com.revan.weathermate.presentation.fragment.main.WeatherInfoFragment"
         android:label="fragment_weather_info"
         tools:layout="@layout/fragment_weather_info" />
 </navigation>

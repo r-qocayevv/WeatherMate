@@ -1,4 +1,4 @@
-package com.revan.weathermate.presentation.fragment
+package com.revan.weathermate.presentation.fragment.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,14 +14,15 @@ class ViewPagerAdapter() : RecyclerView.Adapter<ViewPagerAdapter.ViewHolder>() {
         R.drawable.partly_cloudy_with_sun
     )
 
-    inner class ViewHolder(val binding : ViewpagerLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ViewpagerLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return  ViewHolder(ViewpagerLayoutBinding.inflate(layoutInflater,parent,false))
+        return ViewHolder(ViewpagerLayoutBinding.inflate(layoutInflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

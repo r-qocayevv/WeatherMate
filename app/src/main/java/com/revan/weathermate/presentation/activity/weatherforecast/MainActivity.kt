@@ -1,4 +1,4 @@
-package com.revan.weathermate.presentation.activity
+package com.revan.weathermate.presentation.activity.weatherforecast
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +14,5 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
     }
 }

@@ -1,4 +1,4 @@
-package com.revan.weathermate.presentation.activity
+package com.revan.weathermate.presentation.activity.splash
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.revan.weathermate.R
 import com.revan.weathermate.databinding.ActivitySplashBinding
+import com.revan.weathermate.presentation.activity.weatherforecast.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
