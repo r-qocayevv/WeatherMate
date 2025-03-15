@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -55,6 +56,7 @@ class WeatherInfoFragment : Fragment() {
         getUserLocation(getWeatherForecast = { longitude, latitude ->
             viewModel.getWeatherForecast(latitude, longitude)
         })
+        navigate()
 
         viewModel.weatherForecastData.observe(viewLifecycleOwner) { data ->
             data?.let {
@@ -69,6 +71,12 @@ class WeatherInfoFragment : Fragment() {
 
         viewModel.error.observe(viewLifecycleOwner) {
             setErrorMessage(it)
+        }
+    }
+
+    private fun navigate() {
+        binding.addLocationButton.setOnClickListener {
+            findNavController().navigate(R.id.action_weatherInfoFragment_to_searchLocationFragment)
         }
     }
 
@@ -91,8 +99,6 @@ class WeatherInfoFragment : Fragment() {
                     getWeatherForecast(longitude, latitude)
 
                     getAddressFromLocation(latitude, longitude)
-
-                    println("Latitude: $latitude, Longitude: $longitude")
                 }
             }
     }
@@ -154,7 +160,6 @@ class WeatherInfoFragment : Fragment() {
         try {
             val addresses = geocoder.getFromLocation(lat, lon, 1)
             if (addresses!!.isNotEmpty()) {
-                println(addresses)
                 val address = addresses[0].locality ?: addresses[0].subAdminArea
                 binding.locationText.text = address
             } else {

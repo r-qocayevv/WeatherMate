@@ -18,5 +18,14 @@
         android:id="@+id/weatherInfoFragment"
         android:name="com.revan.weathermate.presentation.fragment.main.WeatherInfoFragment"
         android:label="fragment_weather_info"
-        tools:layout="@layout/fragment_weather_info" />
+        tools:layout="@layout/fragment_weather_info" >
+        <action
+            android:id="@+id/action_weatherInfoFragment_to_searchLocationFragment"
+            app:destination="@id/searchLocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchLocationFragment"
+        android:name="com.revan.weathermate.presentation.fragment.searchLocation.SearchLocationFragment"
+        android:label="fragment_search_location"
+        tools:layout="@layout/fragment_search_location" />
 </navigation>

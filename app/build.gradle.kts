@@ -74,6 +74,9 @@ dependencies {
     //Location
     implementation ("com.google.android.gms:play-services-location:21.3.0")
 
+    //Places
+    implementation ("com.google.android.libraries.places:places:4.1.0")
+
 }
 
 kapt {

@@ -22,4 +22,6 @@
     <string name="chance_of_rain">Chance of rain</string>
     <string name="humidity">Humidity</string>
     <string name="forcats_for_7_days">Forcats for 7 Days</string>
+    <string name="search_location">Search location</string>
+    <string name="search_your_city">Search Your City</string>
 </resources>
