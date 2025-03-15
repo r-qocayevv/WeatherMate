@@ -23,14 +23,15 @@ import com.revan.weathermate.domain.model.CurrentUnits
 import com.revan.weathermate.domain.model.Daily
 import com.revan.weathermate.domain.model.Hourly
 import com.revan.weathermate.domain.model.WeatherForecast
-import com.revan.weathermate.presentation.fragment.daily.DailyWeatherForecastAdapter
-import com.revan.weathermate.presentation.fragment.hourly.HourlyWeatherForecastAdapter
+import com.revan.weathermate.presentation.fragment.main.adapter.DailyWeatherForecastAdapter
+import com.revan.weathermate.presentation.fragment.main.adapter.HourlyWeatherForecastAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 @SuppressLint("SetTextI18n")
@@ -40,6 +41,8 @@ class WeatherInfoFragment : Fragment() {
     private val viewModel: WeatherInfoViewModel by viewModels()
     private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var latitude by Delegates.notNull<Double>()
+    private var longitude by Delegates.notNull<Double>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,10 +56,9 @@ class WeatherInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         showStatusBarAndNavigationBar()
-        getUserLocation(getWeatherForecast = { longitude, latitude ->
-            viewModel.getWeatherForecast(latitude, longitude)
-        })
         navigate()
+        getLatitudeAndLongitudeFromBundle()
+        getWeatherForecast()
 
         viewModel.weatherForecastData.observe(viewLifecycleOwner) { data ->
             data?.let {
@@ -74,6 +76,29 @@ class WeatherInfoFragment : Fragment() {
         }
     }
 
+    private fun getLatitudeAndLongitudeFromBundle() {
+        arguments?.let {
+            val bundle = WeatherInfoFragmentArgs.fromBundle(it)
+            latitude = bundle.latitude.toDouble()
+            longitude = bundle.longitude.toDouble()
+        }
+    }
+
+    private fun getWeatherForecast() {
+        if (latitude == 0.0 || longitude == 0.0) {
+            getUserLocation { long , lat ->
+                latitude = lat
+                longitude = long
+                viewModel.getWeatherForecast(latitude,longitude)
+                getAddressFromLocation(latitude, longitude)
+            }
+        }else {
+            viewModel.getWeatherForecast(latitude,longitude)
+            getAddressFromLocation(latitude, longitude)
+
+        }
+    }
+
     private fun navigate() {
         binding.addLocationButton.setOnClickListener {
             findNavController().navigate(R.id.action_weatherInfoFragment_to_searchLocationFragment)
@@ -86,21 +111,6 @@ class WeatherInfoFragment : Fragment() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun getUserLocation(getWeatherForecast: (longitude: Double, latitude: Double) -> Unit) {
-        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
-            .addOnSuccessListener { location: Location? ->
-                location?.let {
-                    val latitude = it.latitude
-                    val longitude = it.longitude
-
-                    getWeatherForecast(longitude, latitude)
-
-                    getAddressFromLocation(latitude, longitude)
-                }
-            }
     }
 
     private fun setWeatherForecast(weatherForecast: WeatherForecast) {
@@ -121,7 +131,7 @@ class WeatherInfoFragment : Fragment() {
         binding.apply {
             dayOfWeekText.text = dayOfWeek
             localDayText.text = dayOfMonthAndMonth
-            dayOfWeekAndCurrentDayText.text = dayOfWeek + " | " + dayOfMonthAndMonth
+            dayOfWeekAndCurrentDayText.text = "$dayOfWeek | $dayOfMonthAndMonth"
         }
     }
 
@@ -130,10 +140,7 @@ class WeatherInfoFragment : Fragment() {
         binding.dailyRV.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun setCurrentWeatherForecast(
-        currentWeatherForecast: Current,
-        currentWeatherForecastUnits: CurrentUnits
-    ) {
+    private fun setCurrentWeatherForecast(currentWeatherForecast: Current, currentWeatherForecastUnits: CurrentUnits) {
         binding.apply {
             currentTempretureText.text = "${currentWeatherForecast.temperature2m.toInt()}"
             windSpeed.text =
@@ -153,6 +160,19 @@ class WeatherInfoFragment : Fragment() {
         binding.hourlyRV.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.hourlyRV.scrollToPosition(localTime)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getUserLocation(handleLocation: (longitude: Double, latitude: Double) -> Unit) {
+        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
+            .addOnSuccessListener { location: Location? ->
+                location?.let {
+                    val latitude = it.latitude
+                    val longitude = it.longitude
+
+                    handleLocation(longitude, latitude)
+                }
+            }
     }
 
     private fun getAddressFromLocation(lat: Double, lon: Double) {

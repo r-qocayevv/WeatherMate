@@ -101,8 +101,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/myLocation"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
@@ -132,6 +131,30 @@
                 app:layout_constraintEnd_toEndOf="@+id/searchCardView"
                 app:layout_constraintStart_toStartOf="@+id/searchCardView"
                 app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/myLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/searchCardView"
+                app:layout_constraintStart_toStartOf="@+id/searchCardView"
+                app:layout_constraintTop_toBottomOf="@+id/locationsRV">
+
+                <TextView
+                    android:id="@+id/myLocationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:padding="8dp"
+                    android:text="My location"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

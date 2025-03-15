@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_guideFragment_to_weatherInfoFragment"
             app:destination="@id/weatherInfoFragment" />
+        <action
+            android:id="@+id/action_guideFragment_to_searchLocationFragment"
+            app:destination="@id/searchLocationFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherInfoFragment"
@@ -22,10 +25,22 @@
         <action
             android:id="@+id/action_weatherInfoFragment_to_searchLocationFragment"
             app:destination="@id/searchLocationFragment" />
+        <argument
+            android:name="latitude"
+            app:argType="float"
+            android:defaultValue="0" />
+        <argument
+            android:name="longitude"
+            app:argType="float"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/searchLocationFragment"
         android:name="com.revan.weathermate.presentation.fragment.searchLocation.SearchLocationFragment"
         android:label="fragment_search_location"
-        tools:layout="@layout/fragment_search_location" />
+        tools:layout="@layout/fragment_search_location" >
+        <action
+            android:id="@+id/action_searchLocationFragment_to_weatherInfoFragment"
+            app:destination="@id/weatherInfoFragment" />
+    </fragment>
 </navigation>

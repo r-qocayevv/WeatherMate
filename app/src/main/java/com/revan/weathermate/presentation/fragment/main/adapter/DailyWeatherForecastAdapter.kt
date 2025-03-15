@@ -1,5 +1,6 @@
-package com.revan.weathermate.presentation.fragment.daily
+package com.revan.weathermate.presentation.fragment.main.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ class DailyWeatherForecastAdapter(val dailyWeatherForecast : Daily) : RecyclerVi
         return ViewHolder(DailyForecastRowLayoutBinding.inflate(layoutInflater,parent,false))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding  = holder.binding
 

@@ -1,4 +1,4 @@
-package com.revan.weathermate.presentation.fragment.hourly
+package com.revan.weathermate.presentation.fragment.main.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

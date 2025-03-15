@@ -1,4 +1,4 @@
-package com.revan.weathermate.presentation.fragment.main
+package com.revan.weathermate.presentation.fragment.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
