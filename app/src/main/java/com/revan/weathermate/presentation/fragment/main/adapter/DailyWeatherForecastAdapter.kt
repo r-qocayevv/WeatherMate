@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.revan.weathermate.databinding.DailyForecastRowLayoutBinding
 import com.revan.weathermate.domain.model.Daily
+import com.revan.weathermate.util.weatherCodeToIcon
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -30,7 +31,7 @@ class DailyWeatherForecastAdapter(val dailyWeatherForecast : Daily) : RecyclerVi
         val currentDayOfWeek = LocalDate
             .parse(dailyWeatherForecast.time[position],
             DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-
+        binding.weatherImage.weatherCodeToIcon(dailyWeatherForecast.weatherCode[position])
         binding.dayOfWeekText.text =
             currentDayOfWeek.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
         binding.minimumAndMaximumTemperatureText.text =

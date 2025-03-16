@@ -14,7 +14,9 @@ data class HourlyUnitsDto(
     @SerializedName("temperature_2m")
     val temperature2m: String,
     @SerializedName("time")
-    val time: String
+    val time: String,
+    @SerializedName("weather_code")
+    val weatherCode: String
 )
 
 fun HourlyUnitsDto.toHourlyUnits(): HourlyUnits {

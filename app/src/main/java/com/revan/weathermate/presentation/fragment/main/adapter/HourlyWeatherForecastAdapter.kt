@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.revan.weathermate.databinding.HourlyForecastColumnLayoutBinding
 import com.revan.weathermate.domain.model.Hourly
+import com.revan.weathermate.util.weatherCodeToIcon
 import java.time.LocalTime
 
 class HourlyWeatherForecastAdapter(val hourlyWeatherForecast: Hourly) :
@@ -24,6 +25,7 @@ class HourlyWeatherForecastAdapter(val hourlyWeatherForecast: Hourly) :
     ) {
         val binding = holder.binding
         val localTime = LocalTime.now().hour
+        binding.weatherImage.weatherCodeToIcon(hourlyWeatherForecast.weatherCode[position])
         binding.timeText.text =
             if (localTime == position) "Now" else position.toString().padStart(2, '0') + ":00"
         binding.minAndMaximumTemperatureText.text =

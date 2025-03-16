@@ -14,12 +14,15 @@ data class HourlyDto(
     @SerializedName("temperature_2m")
     val temperature2m: List<Double>,
     @SerializedName("time")
-    val time: List<String>
+    val time: List<String>,
+    @SerializedName("weather_code")
+    val weatherCode: List<Int>
 )
 
 fun HourlyDto.toHourly(): Hourly {
     return Hourly(
         precipitationProbability,
         temperature2m,
+        weatherCode
     )
 }

@@ -12,7 +12,9 @@ data class DailyDto(
     @SerializedName("temperature_2m_min")
     val temperature2mMin: List<Double>,
     @SerializedName("time")
-    val time: List<String>
+    val time: List<String>,
+    @SerializedName("weather_code")
+    val weatherCode: List<Int>
 )
 
 fun DailyDto.toDaily(): Daily {
@@ -20,6 +22,7 @@ fun DailyDto.toDaily(): Daily {
         precipitationProbabilityMax,
         temperature2mMax,
         temperature2mMin,
-        time
+        time,
+        weatherCode
     )
 }

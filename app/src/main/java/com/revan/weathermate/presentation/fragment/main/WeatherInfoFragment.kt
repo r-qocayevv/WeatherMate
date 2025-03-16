@@ -25,6 +25,8 @@ import com.revan.weathermate.domain.model.Hourly
 import com.revan.weathermate.domain.model.WeatherForecast
 import com.revan.weathermate.presentation.fragment.main.adapter.DailyWeatherForecastAdapter
 import com.revan.weathermate.presentation.fragment.main.adapter.HourlyWeatherForecastAdapter
+import com.revan.weathermate.util.weatherCodeToText
+import com.revan.weathermate.util.weatherCodeToImage
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.LocalTime
@@ -53,6 +55,7 @@ class WeatherInfoFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         showStatusBarAndNavigationBar()
@@ -142,6 +145,8 @@ class WeatherInfoFragment : Fragment() {
 
     private fun setCurrentWeatherForecast(currentWeatherForecast: Current, currentWeatherForecastUnits: CurrentUnits) {
         binding.apply {
+            weatherImage.weatherCodeToImage(currentWeatherForecast.weatherCode)
+            weatherInterpretationText.weatherCodeToText(currentWeatherForecast.weatherCode)
             currentTempretureText.text = "${currentWeatherForecast.temperature2m.toInt()}"
             windSpeed.text =
                 "${currentWeatherForecast.windSpeed10m}" + currentWeatherForecastUnits.windSpeed10m

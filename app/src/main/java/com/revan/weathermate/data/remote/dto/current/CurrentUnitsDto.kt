@@ -13,6 +13,8 @@ data class CurrentUnitsDto(
     val pressureMsl: String,
     @SerializedName("rain")
     val rain: String,
+    @SerializedName("weather_code")
+    val weatherCode: String,
     @SerializedName("relative_humidity_2m")
     val relativeHumidity2m: String,
     @SerializedName("temperature_2m")
@@ -32,6 +34,7 @@ fun CurrentUnitsDto.toCurrentUnits(): CurrentUnits {
         relativeHumidity2m,
         temperature2m,
         time,
-        windSpeed10m
+        windSpeed10m,
+        weatherCode
     )
 }

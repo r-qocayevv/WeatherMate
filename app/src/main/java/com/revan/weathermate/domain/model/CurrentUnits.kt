@@ -10,5 +10,6 @@ data class CurrentUnits(
     val relativeHumidity2m: String,
     val temperature2m: String,
     val time: String,
-    val windSpeed10m: String
+    val windSpeed10m: String,
+    val weatherCode: String
 )

@@ -84,7 +84,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/weather"
-                            android:src="@drawable/partly_cloudy_with_sun"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/locationText" />
@@ -155,7 +154,7 @@
                             app:layout_constraintTop_toTopOf="@+id/currentTempretureText" />
 
                         <TextView
-                            android:id="@+id/textView7"
+                            android:id="@+id/weatherInterpretationText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -174,7 +173,7 @@
                             android:background="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                            app:layout_constraintTop_toBottomOf="@+id/weatherInterpretationText" />
 
                         <ImageView
                             android:id="@+id/windDirectionImage"

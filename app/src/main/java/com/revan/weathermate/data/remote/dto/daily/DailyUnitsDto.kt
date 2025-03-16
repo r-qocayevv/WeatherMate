@@ -12,7 +12,9 @@ data class DailyUnitsDto(
     @SerializedName("temperature_2m_min")
     val temperature2mMin: String,
     @SerializedName("time")
-    val time: String
+    val time: String,
+    @SerializedName("weather_code")
+    val weatherCode: String
 )
 
 fun DailyUnitsDto.toDailyUnits(): DailyUnits {
